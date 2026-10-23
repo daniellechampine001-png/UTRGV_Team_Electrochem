@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Team 10: Electrochem | Portable PFAS Detection</title>
+<meta name="description" content="UTRGV Senior Design I, Team 10: a compact, low-cost electrochemical device for detecting PFAS in water on-site.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky-50:#f1f8fe;
+  --sky-100:#e3f1fc;
+  --sky-200:#cce6f9;
+  --sky-300:#a6d3f3;
+  --sky-500:#3d8fd6;
+  --ink:#10324f;
+  --ink-soft:#3f5f7a;
+  --surface:rgba(255,255,255,.82);
+  --line:#b9d9f0;
+  --good:#2e9e6b;
+  --warn:#e3b412;
+  --bad:#d4504c;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{
+  margin:0;
+  font-family:Figtree,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--ink);
+  line-height:1.65;
+  background:
+    radial-gradient(1100px 600px at 85% -10%, #ffffff 0%, transparent 60%),
+    linear-gradient(180deg,var(--sky-100) 0%,var(--sky-200) 100%);
+  background-attachment:fixed;
+}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif;line-height:1.15;margin:0 0 .6em;letter-spacing:-.01em}
+h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:800}
+h2{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:700}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0 0 1em}
+a{color:#1d6fb8}
+a:focus-visible,button:focus-visible{outline:3px solid var(--sky-500);outline-offset:3px;border-radius:6px}
+
+/* breadcrumb bar */
+.crumbs{background:var(--ink);color:#dcecf9;font-size:.85rem;padding:.6rem 1.25rem}
+.crumbs a{color:#dcecf9;text-decoration:none;font-weight:600}
+.crumbs a:hover{text-decoration:underline}
+.crumbs span{opacity:.5;margin:0 .45rem}
+
+/* layout */
+.shell{max-width:1180px;margin:0 auto;padding:0 1.25rem;display:grid;grid-template-columns:230px 1fr;gap:2.5rem}
+@media(max-width:900px){.shell{grid-template-columns:1fr}}
+
+/* hero */
+.hero{max-width:1180px;margin:0 auto;padding:3.5rem 1.25rem 2.5rem}
+.hero p.lead{font-size:1.2rem;max-width:44rem;color:var(--ink-soft)}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:2rem}
+.team-grid .box{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.1rem 1.3rem}
+.team-grid h3{margin-bottom:.4rem;color:#1d6fb8}
+.team-grid ul{margin:0;padding:0;list-style:none}
+.team-grid li{padding:.12rem 0}
+
+/* sidebar index */
+.index{position:sticky;top:20px;align-self:start;margin-top:1rem}
+.index h2{font-size:1.1rem;margin-bottom:.5rem}
+.index ol{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+.index a{display:block;padding:.32rem .9rem;color:var(--ink-soft);text-decoration:none;font-size:.93rem;font-weight:500;margin-left:-2px;border-left:2px solid transparent}
+.index a:hover{color:var(--ink)}
+.index a.active{color:var(--ink);border-left-color:var(--sky-500);font-weight:600;background:linear-gradient(90deg,rgba(61,143,214,.12),transparent)}
+@media(max-width:900px){
+  .index{position:static;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.2rem}
+  .index ol{columns:2;border:0}
+  .index a{border:0;padding:.25rem 0;margin:0}
+}
+
+/* sections */
+main{padding-bottom:4rem}
+section{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:2rem 2.2rem;margin:1rem 0 1.4rem;box-shadow:0 10px 30px -18px rgba(16,50,79,.35)}
+@media(max-width:600px){section{padding:1.4rem 1.2rem}}
+.back{display:inline-block;margin-top:.6rem;font-size:.9rem;font-weight:600;text-decoration:none;color:#1d6fb8}
+.back:hover{text-decoration:underline}
+
+.quote{border-left:5px solid var(--sky-500);background:var(--sky-50);padding:1rem 1.3rem;border-radius:0 12px 12px 0;font-size:1.1rem;margin:1.2rem 0}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1.2rem 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem}
+.card h3{color:#1d6fb8}
+.card p{margin:0;font-size:.97rem}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.2rem 0}
+.stat{background:var(--ink);color:#fff;border-radius:14px;padding:1.2rem 1.3rem}
+.stat b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:2.4rem;line-height:1;color:var(--sky-300);margin-bottom:.4rem}
+.stat span{font-size:.95rem;color:#dcecf9}
+
+figure{margin:1.2rem 0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:.8rem;text-align:center}
+figure img{max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto}
+figcaption{font-size:.88rem;color:var(--ink-soft);margin-top:.6rem}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+.two figure{margin:.4rem 0}
+.zoom{cursor:zoom-in}
+
+.placeholder{border:2px dashed var(--sky-300);background:var(--sky-50);border-radius:14px;padding:1.2rem 1.3rem;color:var(--ink-soft)}
+.placeholder b{color:var(--ink)}
+
+.checklist{list-style:none;padding:0;margin:1rem 0}
+.checklist li{display:flex;gap:.8rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid var(--line)}
+.checklist li:last-child{border:0}
+.checklist li::before{content:"";flex:none;width:1.15rem;height:1.15rem;margin-top:.3rem;border:2px solid var(--sky-500);border-radius:5px;background:#fff}
+
+.status{display:flex;flex-wrap:wrap;gap:1.5rem;margin:1rem 0}
+.variant{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1rem 1.2rem;min-width:220px;flex:1}
+.variant h3{margin-bottom:.6rem}
+.variant ul{list-style:none;margin:0;padding:0}
+.variant li{padding:.5rem .8rem;border-radius:8px;margin-bottom:.4rem;font-weight:600;border:1px solid rgba(0,0,0,.1)}
+.s-no{background:#f6c9c7}.s-maybe{background:#fbeea6}.s-yes{background:#bfe8d3}
+.legend{display:flex;flex-wrap:wrap;gap:1rem;font-size:.9rem;margin-top:.5rem}
+.legend i{display:inline-block;width:.9rem;height:.9rem;border-radius:4px;margin-right:.4rem;vertical-align:-.1rem;border:1px solid rgba(0,0,0,.15)}
+
+.flow{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:1rem 0}
+.flow span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:.35rem .9rem;font-weight:600;font-size:.92rem}
+.flow em{font-style:normal;color:var(--sky-500);font-weight:700}
+
+footer{text-align:center;color:var(--ink-soft);font-size:.9rem;padding:2rem 1rem 3rem}
+
+/* lightbox */
+dialog{border:0;padding:0;background:transparent;max-width:95vw}
+dialog::backdrop{background:rgba(16,50,79,.75)}
+dialog img{max-width:95vw;max-height:92vh;border-radius:12px;background:#fff}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="crumbs">
+  <a href="https://www.utrgv.edu/en-us/index.htm">UTRGV</a><span>/</span>
+  <a href="https://www.utrgv.edu/cecs/">College of Engineering and Computer Science</a><span>/</span>
+  <a href="https://www.utrgv.edu/mece/">Mechanical Engineering Department</a>
+</div>
+
+<header class="hero" id="top">
+  <h1>Team 10: Electrochem</h1>
+  <p class="lead">A compact, low-cost electrochemical device that detects PFAS in water on-site, so people can get answers in minutes instead of waiting days for a lab.</p>
+  <div class="team-grid">
+    <div class="box">
+      <h3>SDI Students</h3>
+      <ul>
+        <li>Danielle Champine</li>
+        <li>Edwin Figueroa</li>
+        <li>Felipe Elizondo</li>
+        <li>Jesus Flores</li>
+        <li>Jordan Salinas</li>
+        <li>Ricardo Salinas</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Faculty</h3>
+      <ul>
+        <li>Dr. Gyu Leem</li>
+        <li>Dr. Eleazar Marquez</li>
+        <li>Dr. Noe Vargas</li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+
+  <nav class="index" aria-label="Page index">
+    <h2 id="index">Index</h2>
+    <ol>
+      <li><a href="#welcome">Welcome</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#important">Important to know</a></li>
+      <li><a href="#why">Why it matters</a></li>
+      <li><a href="#solution">Our proposed solution</a></li>
+      <li><a href="#idea-to-reality">From idea to reality</a></li>
+      <li><a href="#prototype">Prototype early and often</a></li>
+      <li><a href="#final">Final product</a></li>
+      <li><a href="#future">Future work</a></li>
+      <li><a href="#learn-more">Learn more</a></li>
+      <li><a href="#acknowledgements">Acknowledgements</a></li>
+      <li><a href="#feedback">Feedback</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <section id="welcome">
+      <h2>Welcome!</h2>
+      <p>We are Team 10, Electrochem, and this is our Senior Design I project. We are designing a portable device that detects PFAS in water right where the water is. The problem we are tackling is that testing for PFAS today is slow, expensive, and out of reach for most people. We hope you enjoy following along.</p>
+      <figure>
+        <img class="zoom" src="images/team-10.jpg" alt="Team 10 members standing in front of a staircase at UTRGV">
+        <figcaption>Team 10: Electrochem</figcaption>
+      </figure>
+      <div class="placeholder">
+        <b>Welcome video:</b> add your video here. Replace this box with a YouTube embed or a link when it is ready.
+      </div>
+      <p style="margin-top:1rem"><b>Website:</b> <i>paste website link</i> &nbsp;|&nbsp; <b>Technical report:</b> <i>paste report link or file</i></p>
+      <a class="back" href="#index">Back to index</a>
+    </section>
+
+    <section id="problem">
+      <h2>What is the problem we are trying to solve?</h2>
+      <p>PFAS contamination is a growing concern, but the tools that detect it are built for specialized laboratories. People who want to know whether their water is safe face high costs, long waits, and few places to send samples. There is no easy way to check a water source on the spot.</p>
+      <div class="cards">
+        <div class="card"><h3>High equipment costs</h3><p>Advanced laboratory instruments are expensive to buy, run, and maintain, which makes routine PFAS testing expensive.</p></div>
+        <div class="card"><h3>Time-consuming process</h3><p>Collecting, transporting, preparing, and analyzing a sample all delay results.</p></div>
+        <div class="card"><h3>Specialized laboratories</h3><p>Testing needs trained personnel and sophisticated equipment. These labs are few and far between, so samples pile up into a backlog.</p></div>
+        <div class="card"><h3>Limited on-site monitoring</h3><p>Conventional lab methods are not suited to real-time monitoring at the water source, and most sources have no PFAS lab nearby.</p></div>
+      </div>
+      <a class="back" href="#index">Back to index</a>
+    </section>
+
+    <section id="important">
+      <h2>Important to know</h2>
+      <p>To understand the problem better, we researched PFAS and what it does. Here is what we learned.</p>
+      <h3>What is PFAS?</h3>
+      <ul>
+        <li>PFAS is a classification of chemicals commonly found in manufactured products that are water resistant and non-stick.</li>
+        <li>PFOS and PFOA are the most researched PFAS chemicals and have an extensive history of environmental contamination.</li>
+        <li>They are primarily made of carbon-fluorine bonds, which are highly resistant to degradation because of their chemical structure.</li>
+        <li>Fluorine atoms tightly enclose the carbon chain because of fluorine's high electronegativity.</li>
+      </ul>
+      <figure style="max-width:460px">
+        <img class="zoom" src="images/pfas-structure.jpg" alt="Chemical structures of PFOS (perfluorooctanesulfonic acid) and PFOA (perfluorooctanoic acid)">
+        <figcaption>Figure 1: PFOS and PFOA chemical structure</figcaption>
+      </figure>
+      <h3>Harmful effects</h3>
+      <div class="two">
+        <figure>
+          <img class="zoom" src="images/health-effects.jpg" alt="Diagram of health effects linked to PFAS exposure in the human body">
+          <figcaption>Long-term exposure to certain PFAS has been linked to increased cholesterol, reduced immune response to vaccines, liver changes, developmental effects, and increased risk of some cancers.</figcaption>
+        </figure>
+        <figure>
+          <img class="zoom" src="images/environment.jpg" alt="Polluted stream with foam and trash flowing under a bridge">
+          <figcaption>PFAS can last a long time and resist degradation in soil, water, and wildlife, which contributes to long-term environmental contamination.</figcaption>
+        </figure>
+      </div>
+      <p>PFAS shows up in everyday items, which is part of why it is so widespread.</p>
+      <figure>
+        <img class="zoom" src="images/everyday-products.jpg" alt="Nonstick cookware, a waterproof jacket, and a plastic water bottle">
+        <figcaption>PFAS is found in everyday products like nonstick cookware, waterproof clothing, and bottled water.</figcaption>
+      </figure>
+
+      <a class="back" href="#index">Back to index</a>
+    </section>
+
+    <section id="why">
+      <h2>Why is this problem important?</h2>
+      <p>PFAS lingers in the environment and in our bodies, so knowing what is in your water matters. Today, finding out takes money and patience that most communities do not have.</p>
+      <div class="stats">
+        <div class="stat"><b>$300+</b><span>to test a single drinking water sample, according to the Connecticut Government</span></div>
+        <div class="stat"><b>5 days</b><span>turn-around for FREDSense and Tap Score, about the fastest options available to the general public</span></div>
+      </div>
+      <p>Those five days mean five more days of drinking water that may contain PFAS without knowing it. And because few labs exist, the samples all funnel into the same places, which adds to the backlog.</p>
+      <a class="back" href="#index">Back to index</a>
+    </section>
+
+    <section id="solution">
+      <h2>Our proposed solution</h2>
+      <div class="quote">We are designing a lightweight, compact, and user-friendly electrochemical device: insert a water sample, press start, and get your results.</div>
+      <div class="cards">
+        <div class="card"><h3>Simple to use</h3><p>No training necessary. With one small device and possibly some sample holders (not confirmed), a manual is enough for users to use it confidently.</p></div>
+        <div class="card"><h3>Low cost</h3><p>The compact size limits the material used, and with cost-effective material choices, our equipment cost is a fraction of typical PFAS detection costs.</p></div>
+        <div class="card"><h3>Fast turn-around</h3><p>The device goes with you to the site, so there is no transporting samples to and from a lab.</p></div>
+      </div>
+      <h3>How the device works</h3>
+      <p>Water from the sample is held and pumped to the sensor, which senses PFAS. The measurement is processed, a control loop feeds back into the sensor, and the result appears on the output display. A solar panel charges a supercapacitor that stores energy to power the system.</p>
+      <div class="flow" aria-label="Signal path">
+        <span>Sample water</span><em>&rarr;</em><span>Holds water</span><em>&rarr;</em><span>Pump</span><em>&rarr;</em><span>Senses PFAS</span><em>&rarr;</em><span>Measures PFAS</span><em>&rarr;</em><span>Output display</span>
+      </div>
+      <figure>
+        <img class="zoom" src="images/functional-diagram.jpg" alt="Functional diagram showing material, energy, and signal flow through the device">
+        <figcaption>Functional diagram. Energy: dashed line. Materials: double line. Signal: single line.</figcaption>
+      </figure>
+      <a class="back" href="#index">Back to index</a>
+    </section>
+
+    <section id="idea-to-reality">
+      <h2>From idea to reality</h2>
+      <p>Once we had a clear solution idea, we broke the device into the functions it must perform and listed options for each. This morphological chart covers collecting and containing the sample, the electrode materials, the detection method, the electronics, the display, and the power source.</p>
+      <figure>
+        <img class="zoom" src="images/morphological-chart.jpg" alt="Morphological chart of design options for detecting PFAS in water">
+        <figcaption>Morphological chart. Click to enlarge.</figcaption>
+      </figure>
+      <h3>Concept variants we are weighing</h3>
+      <p>We compared variants of two parts of the sensor, the gasket and the counter electrode, and sorted them by how likely we are to pursue each one.</p>
+      <div class="status">
+        <div class="variant">
+          <h3>Gasket</h3>
+          <ul>
+            <li class="s-no">No gasket</li>
+            <li class="s-maybe">1 gasket</li>
+            <li class="s-maybe">2 gaskets</li>
+          </ul>
+        </div>
+        <div class="variant">
+          <h3>Counter electrode</h3>
+          <ul>
+            <li class="s-no">Platinum plate</li>
+            <li class="s-maybe">Platinum wire</li>
+            <li class="s-maybe">Platinum coating</li>
+          </ul>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i class="s-no"></i>Will not pursue</span>
+        <span><i class="s-maybe"></i>In consideration</span>
+        <span><i class="s-yes"></i>Will pursue</span>
+      </div>
+      <a class="back" href="#index">Back to index</a>
+    </section>
+
+    <section id="prototype">
+      <h2>Prototype early and often</h2>
+      <p>Sketching and layering the design early helps us check that the parts fit together before we order anything. Our preliminary design proposal shows the full device and the sensor stack inside it.</p>
+      <div class="two">
+        <figure>
+          <img class="zoom" src="images/device-concept.jpg" alt="Concept sketch of the handheld device with display, sample collection port, and a pump moving the sample to the sensor">
+          <figcaption>Device concept: display, sample collection port, and a pump that moves the sample to the sensor. The top panel is the solar panel.</figcaption>
+        </figure>
+        <figure>
+          <img class="zoom" src="images/electrode-stack.jpg" alt="Exploded view of the sensor: working electrode, gasket, and counter electrode">
+          <figcaption>Sensor stack: (1) working electrode of glass with FTO and ITO layers, (2) silicon gasket with silver wire, (3) counter electrode of silicon with a platinum coating.</figcaption>
+        </figure>
+      </div>
+      <a class="back" href="#index">Back to index</a>
+    </section>
+
+    <section id="final">
+      <h2>Final product</h2>
+      <div class="placeholder">
+        <b>In progress.</b> We are at our midterm in Senior Design I, so the final device is not built yet. Photos, a component breakdown, and test videos will be added here as we build and test.
+      </div>
+      <a class="back" href="#index">Back to index</a>
+    </section>
+
+    <section id="future">
+      <h2>Future work</h2>
+      <p>Here is what is left to do:</p>
+      <ul class="checklist">
+        <li>Order or manufacture parts</li>
+        <li>Make procedures for building the actual device</li>
+        <li>Run tests for maximum sensitivity and the lowest possible detection limits</li>
+        <li>Refine the design for minimal cost and maximum compactness</li>
+        <li>Go the extra mile for NVC</li>
+      </ul>
+      <a class="back" href="#index">Back to index</a>
+    </section>
+
+    <section id="learn-more">
+      <h2>Learn more about our design process</h2>
+      <p>The information on this page is a summary intended for the public. To learn about the project details, contact Dr. Noe Vargas Hernandez at <a href="mailto:noe.vargas@utrgv.edu">noe.vargas@utrgv.edu</a>.</p>
+      <p><b>Technical report:</b> <i>paste report link or file</i></p>
+      <h3>References</h3>
+      <p class="placeholder">Add your references here (for example, the Connecticut Government source for the $300 testing cost, and the FREDSense and Tap Score turn-around times).</p>
+      <a class="back" href="#index">Back to index</a>
+    </section>
+
+    <section id="acknowledgements">
+      <h2>Acknowledgements</h2>
+      <p>Our faculty guided us throughout this project: Dr. Gyu Leem, Dr. Eleazar Marquez, and Dr. Noe Vargas. Thank you.</p>
+      <p class="placeholder">Add anyone else who helped your team here.</p>
+      <a class="back" href="#index">Back to index</a>
+    </section>
+
+    <section id="feedback">
+      <h2>Feedback</h2>
+      <p>We would like to hear what you think. Send questions or comments to the contact above, or add a feedback form link here.</p>
+      <a class="back" href="#index">Back to index</a>
+    </section>
+
+  </main>
+</div>
+
+<footer>Team 10: Electrochem &middot; Senior Design I &middot; UTRGV Mechanical Engineering</footer>
+
+<dialog id="lightbox" aria-label="Enlarged image"><img alt=""></dialog>
+
+<script>
+// highlight current section in the index
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.index a'));
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(a){a.classList.remove('active')});
+        var a=map[e.target.id]; if(a) a.classList.add('active');
+      }
+    });
+  },{rootMargin:'-20% 0px -70% 0px'});
+  document.querySelectorAll('main section').forEach(function(s){obs.observe(s)});
+
+  // click to enlarge images
+  var dlg=document.getElementById('lightbox'),big=dlg.querySelector('img');
+  document.querySelectorAll('img.zoom').forEach(function(img){
+    img.addEventListener('click',function(){big.src=img.src;big.alt=img.alt;dlg.showModal()});
+  });
+  dlg.addEventListener('click',function(){dlg.close()});
+})();
+</script>
+</body>
+</html>
