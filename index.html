@@ -4,591 +4,1161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Team 10 Electrochem | UTRGV</title>
-<meta name="description" content="UTRGV Team 10 Electrochem - Portable PFAS detection in water">
+<title>Team 10: Electrochem | UTRGV</title>
+<meta name="description" content="UTRGV Team 10 Electrochem - Research and development of a compact electrochemical PFAS sensing system.">
 
 <style>
 :root {
-  --navy: #10324f;
-  --blue: #277ab7;
-  --light: #e7f3fc;
-  --border: #c4deef;
+  --navy:#142d4b;
+  --blue:#1875ad;
+  --pale:#eaf3f9;
+  --line:#b9d5e6;
+  --white:#fff;
+  --muted:#425d74;
 }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: var(--navy);
-  line-height: 1.7;
-  background: linear-gradient(135deg,#e7f3fc,#cce6f9);
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:#eaf3f9;
+  color:var(--navy);
+  line-height:1.75;
 }
-header {
-  background: #10324f;
-  color: white;
-  padding: 55px 20px;
-  text-align: center;
+a {color:var(--blue)}
+.site-nav {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:20px;
+  padding:18px 5%;
+  background:#edf5facc;
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid #ffffffaa;
+  position:sticky;
+  top:0;
+  z-index:100;
 }
-header h1 {
-  font-size: clamp(32px,5vw,52px);
-  margin: 0 0 12px;
+.brand {
+  display:flex;
+  align-items:center;
+  gap:20px;
+  text-decoration:none;
+  color:var(--navy);
 }
-header p {
-  max-width: 800px;
-  margin: auto;
-  font-size: 18px;
+.brand strong {
+  display:block;
+  font-size:14px;
+  letter-spacing:1px;
 }
-nav {
-  background: #17486e;
-  padding: 14px;
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-  position: sticky;
-  top: 0;
-  z-index: 5;
+.brand small {
+  font-size:10px;
+  letter-spacing:2px;
 }
-nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
+.logo {
+  width:48px;
+  height:48px;
+  position:relative;
 }
-nav a:hover { text-decoration: underline; }
+.logo:before,.logo:after {
+  content:"";
+  position:absolute;
+  width:27px;
+  height:27px;
+  transform:rotate(45deg);
+  border:1px solid #2c79ad;
+  top:10px;
+}
+.logo:before {left:0}
+.logo:after {
+  left:18px;
+  background:#4798c7aa;
+}
+.nav-links {
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+}
+.nav-links a {
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.8px;
+  text-decoration:none;
+  color:var(--navy);
+}
+.nav-links a:hover {color:var(--blue)}
+.hero {
+  min-height:720px;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 75% 20%,#ffffffdd,transparent 36%),
+    radial-gradient(circle at 18% 70%,#c1e0f4,transparent 35%),
+    linear-gradient(135deg,#d7e4ec,#f3f8fc 52%,#c9e1f1);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:55px 20px 100px;
+}
+.hero:before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(
+    135deg,transparent 0,
+    transparent 170px,
+    #ffffff65 171px,
+    transparent 172px
+  );
+  pointer-events:none;
+}
+.hero-circle {
+  width:min(620px,90vw);
+  aspect-ratio:1;
+  border:8px solid #fff;
+  outline:13px solid #d0e5f180;
+  border-radius:50%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:55px;
+  background:#f5f9fc70;
+  box-shadow:0 15px 65px #7195b330;
+  position:relative;
+  z-index:2;
+}
+.eyebrow {
+  font-size:13px;
+  letter-spacing:9px;
+  font-weight:700;
+}
+.hero h1 {
+  font-size:clamp(32px,5vw,59px);
+  line-height:1.2;
+  letter-spacing:3px;
+  margin:28px 0 18px;
+}
+.accent-line {
+  width:90px;
+  height:3px;
+  background:var(--blue);
+  margin:10px auto 25px;
+}
+.hero-subtitle {
+  font-size:13px;
+  letter-spacing:3px;
+  font-weight:700;
+  line-height:1.8;
+}
+.hero-description {
+  font-size:18px;
+  max-width:400px;
+  line-height:1.55;
+  margin:22px 0;
+}
+.button {
+  display:inline-block;
+  background:var(--blue);
+  color:white;
+  padding:12px 28px;
+  border-radius:30px;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:1.5px;
+}
+.button:hover {background:#105884}
+.hero-side {
+  position:absolute;
+  top:43%;
+  z-index:2;
+  font-size:13px;
+  letter-spacing:4px;
+  line-height:2;
+  font-weight:700;
+}
+.hero-left {left:4%}
+.hero-right {right:4%}
+.diamond {
+  position:absolute;
+  width:170px;
+  height:170px;
+  transform:rotate(45deg);
+  border:3px solid white;
+  overflow:hidden;
+  opacity:.75;
+}
+.diamond img {
+  width:145%;
+  height:145%;
+  object-fit:cover;
+  transform:rotate(-45deg) scale(1.4);
+}
+.diamond-left {left:15%;top:33%}
+.diamond-right {right:15%;top:35%}
+.scroll-cue {
+  position:absolute;
+  bottom:30px;
+  text-align:center;
+  letter-spacing:4px;
+  font-size:11px;
+  font-weight:700;
+}
+.scroll-cue a {text-decoration:none}
 main {
-  max-width: 1100px;
-  margin: 30px auto;
-  padding: 0 18px;
+  max-width:1180px;
+  margin:0 auto;
+  padding:0 20px 50px;
 }
 section {
-  background: white;
-  border-radius: 16px;
-  padding: 30px;
-  margin-bottom: 25px;
-  box-shadow: 0 5px 20px #10324f15;
+  background:#ffffffd9;
+  border:1px solid #ffffff;
+  border-radius:22px;
+  padding:45px;
+  margin:28px 0;
+  box-shadow:0 12px 40px #567c9914;
+  scroll-margin-top:115px;
+}
+.section-label {
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:5px;
+  color:var(--blue);
+  text-transform:uppercase;
 }
 h2 {
-  color: #14578a;
-  font-size: 28px;
-  margin-top: 0;
+  font-size:clamp(28px,3.4vw,39px);
+  line-height:1.3;
+  margin:12px 0 25px;
 }
-h3 { color: #277ab7; }
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 12px;
-  display: block;
-  margin: 15px auto;
+h3 {
+  font-size:20px;
+  color:#17699e;
+  margin:25px 0 10px;
 }
-figure {
-  margin: 20px 0;
-  text-align: center;
+p {margin:0 0 18px}
+.lead {
+  font-size:19px;
+  color:#2e4961;
 }
-figcaption {
-  font-size: 14px;
-  color: #526a7e;
-  margin-top: 8px;
+.two-col {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:45px;
+  align-items:center;
 }
-.photo {
-  width: 100%;
-  max-height: 470px;
-  object-fit: contain;
-  cursor: zoom-in;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-  gap: 20px;
-  margin-top: 20px;
+.three-col {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
 }
 .card {
-  background: #f0f8fe;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
+  background:#edf6fc;
+  border:1px solid #d4e7f4;
+  padding:25px;
+  border-radius:15px;
 }
-.card h3 { margin-top: 0; }
-.card p { margin-bottom: 0; }
-.highlight {
-  border-left: 5px solid #277ab7;
-  background: #e7f3fc;
-  padding: 20px;
-  border-radius: 8px;
-  font-size: 18px;
+.card h3 {margin-top:0}
+.card p:last-child {margin-bottom:0}
+.feature {
+  padding:22px;
+  border-left:3px solid var(--blue);
+  background:#f1f8fd;
+  border-radius:8px;
+  margin:15px 0;
+}
+.image {
+  width:100%;
+  max-height:540px;
+  object-fit:contain;
+  border-radius:14px;
+  cursor:zoom-in;
+}
+figure {
+  margin:25px 0;
+  text-align:center;
+}
+figcaption {
+  font-size:13px;
+  color:#536b7d;
+  margin-top:10px;
+}
+.team-photo {
+  width:100%;
+  max-height:550px;
+  object-fit:contain;
+  border-radius:16px;
+}
+.name-strip {
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:4px;
+  margin-top:12px;
+}
+.name-strip span {
+  text-align:center;
+  padding:12px 4px;
+  background:#e4f2fb;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:700;
+}
+.advisors {
+  background:#e9f5fc;
+  padding:22px;
+  border-radius:14px;
+  margin-top:22px;
+}
+.advisors p {margin:6px 0}
+.process {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:15px;
+}
+.process-step {
+  background:#f0f8fe;
+  padding:22px;
+  border-radius:12px;
+  border:1px solid #cfe5f4;
+}
+.step-number {
+  color:var(--blue);
+  font-size:27px;
+  font-weight:800;
+}
+.process-step h3 {margin:5px 0 10px}
+.notice {
+  border-left:4px solid var(--blue);
+  background:#e9f5fc;
+  padding:22px;
+  margin:25px 0;
+  border-radius:8px;
+}
+.reference-list li {
+  padding:8px 0;
+  overflow-wrap:anywhere;
 }
 footer {
-  background: #10324f;
-  color: white;
-  text-align: center;
-  padding: 30px;
+  text-align:center;
+  background:#d8e9f5;
+  padding:40px 20px;
+  font-size:13px;
+  letter-spacing:1px;
 }
-footer a { color: #b9e2ff; }
 dialog {
-  border: none;
-  background: transparent;
-  padding: 0;
-  max-width: 95vw;
+  padding:0;
+  border:0;
+  background:transparent;
+  max-width:95vw;
 }
-dialog::backdrop {
-  background: rgba(0,0,0,.85);
-}
+dialog::backdrop {background:#00172ddd}
 dialog img {
-  max-width: 95vw;
-  max-height: 90vh;
-  object-fit: contain;
+  max-width:95vw;
+  max-height:90vh;
+  object-fit:contain;
 }
-@media(max-width:600px) {
-  section { padding: 20px; }
-  nav { gap: 12px; }
+@media(max-width:1000px) {
+  .hero-side,.diamond {display:none}
+  .site-nav {justify-content:center}
+}
+@media(max-width:700px) {
+  .hero {min-height:650px}
+  .hero-circle {padding:28px}
+  .hero h1 {font-size:29px;letter-spacing:1px}
+  .hero-description {font-size:14px}
+  .hero-subtitle {font-size:10px}
+  .eyebrow {font-size:10px}
+  section {padding:25px}
+  .two-col,.three-col {grid-template-columns:1fr}
+  .name-strip {grid-template-columns:repeat(3,1fr)}
+  .nav-links {justify-content:center;gap:12px}
+  .nav-links a {font-size:10px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Team 10: Electrochem</h1>
-  <p>UTRGV Mechanical Engineering | Senior Design I</p>
-  <p>
-    Developing a compact electrochemical device
-    for detecting PFAS contamination in water.
-  </p>
-</header>
-
-<nav>
-  <a href="#welcome">Welcome</a>
-  <a href="#problem">The Problem</a>
-  <a href="#pfas">Understanding PFAS</a>
-  <a href="#solution">Our Solution</a>
-  <a href="#design">Design Process</a>
-  <a href="#prototype">Prototype</a>
-  <a href="#future">Future Work</a>
-  <a href="#team">Our Team</a>
+<nav class="site-nav">
+  <a class="brand" href="#home">
+    <div class="logo"></div>
+    <div>
+      <small>UTRGV</small>
+      <strong>TEAM 10: ELECTROCHEM</strong>
+      <small>MECHANICAL ENGINEERING</small>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#home">HOME</a>
+    <a href="#team">OUR TEAM</a>
+    <a href="#problem">THE PROBLEM</a>
+    <a href="#pfas">PFAS</a>
+    <a href="#solution">OUR SOLUTION</a>
+    <a href="#design">DESIGN PROCESS</a>
+    <a href="#prototype">PROTOTYPE</a>
+    <a href="#future">FUTURE WORK</a>
+    <a href="#references">REFERENCES</a>
+  </div>
 </nav>
+
+<header class="hero" id="home">
+  <div class="hero-side hero-left">
+    CLEANER<br>WATER.<br>SAFER<br>COMMUNITIES.<br>
+    A BRIGHTER<br>FUTURE.
+  </div>
+
+  <div class="diamond diamond-left">
+    <img src="./environment.jpg" alt="Water">
+  </div>
+
+  <div class="hero-circle">
+    <div class="eyebrow">TEAM 10</div>
+    <h1>ELECTROCHEM</h1>
+    <div class="accent-line"></div>
+    <div class="hero-subtitle">
+      UTRGV | MECHANICAL ENGINEERING<br>
+      SENIOR DESIGN I
+    </div>
+    <p class="hero-description">
+      Developing a compact, solar-assisted
+      electrochemical sensing system for
+      investigating PFAS contamination in water.
+    </p>
+    <a class="button" href="#about">
+      EXPLORE OUR PROJECT ↓
+    </a>
+  </div>
+
+  <div class="diamond diamond-right">
+    <img src="./device-concept.jpg" alt="Device concept">
+  </div>
+
+  <div class="hero-side hero-right">
+    ENVIRONMENT<br>INNOVATION<br>
+    SUSTAINABILITY<br>ENGINEERING
+  </div>
+
+  <div class="scroll-cue">
+    <a href="#about">SCROLL ↓</a>
+  </div>
+</header>
 
 <main>
 
-<section id="welcome">
-  <h2>Welcome to Team Electrochem!</h2>
-  <p>
-    We are Team 10, Electrochem, a senior design
-    engineering team at the University of Texas
-    Rio Grande Valley.
-  </p>
-  <p>
-    Our project focuses on developing a portable,
-    compact electrochemical sensing device capable
-    of detecting per- and polyfluoroalkyl
-    substances (PFAS) in water.
-  </p>
-  <p>
-    Our goal is to explore a faster, more
-    accessible alternative to conventional
-    laboratory-based PFAS testing.
-  </p>
-
-  <figure>
-    <img class="photo" src="./team-10.jpg"
-         alt="UTRGV Team 10 Electrochem">
-    <figcaption>Team 10: Electrochem</figcaption>
-  </figure>
-</section>
-
-<section id="problem">
-  <h2>What Problem Are We Trying to Solve?</h2>
-  <p>
-    PFAS contamination has become an increasing
-    environmental concern because these chemicals
-    are highly persistent and can accumulate
-    in the environment.
-  </p>
-  <p>
-    Conventional PFAS detection often requires
-    specialized laboratory equipment, trained
-    personnel, and sample transportation.
-    These requirements can make testing
-    expensive and time-consuming.
-  </p>
-
-  <div class="grid">
-    <div class="card">
-      <h3>High Equipment Costs</h3>
-      <p>
-        Traditional analytical instruments
-        require significant investment
-        and specialized maintenance.
-      </p>
+<section id="about">
+  <div class="two-col">
+    <div>
+      <div class="section-label">About Us</div>
+      <h2>Engineering a New Approach to Water Monitoring</h2>
     </div>
-    <div class="card">
-      <h3>Long Testing Times</h3>
-      <p>
-        Sample transportation, preparation,
-        and laboratory analysis can delay results.
+    <div>
+      <p class="lead">
+        Team 10: Electrochem is an engineering team
+        from the University of Texas Rio Grande Valley.
+        We are researching, designing, and developing
+        a compact electrochemical device to investigate
+        PFAS contamination in water using electrochemical
+        impedance spectroscopy (EIS).
       </p>
-    </div>
-    <div class="card">
-      <h3>Limited Accessibility</h3>
       <p>
-        Specialized testing facilities
-        may not be readily available
-        to all communities.
+        Our approach combines electrochemical sensing,
+        controlled water circulation, electrode engineering,
+        data processing, and solar-assisted power into
+        a proposed water-monitoring platform.
       </p>
     </div>
   </div>
 </section>
 
-<section id="pfas">
-  <h2>Understanding PFAS</h2>
+<section id="team">
+  <div class="section-label">Meet Our Team</div>
+  <h2>The People Behind Electrochem</h2>
   <p>
-    PFAS stands for per- and polyfluoroalkyl
-    substances. These are a large family
-    of synthetic chemicals known for their
-    resistance to heat, water, and oil.
-  </p>
-  <p>
-    Their strong carbon-fluorine bonds
-    contribute to their persistence in
-    the environment.
+    Our team collaborates on research, material selection,
+    design development, sensor integration, and prototype
+    evaluation.
   </p>
 
-  <h3>Chemical Structure</h3>
   <figure>
-    <img class="photo" src="./pfas-structure.jpg"
-         alt="PFAS chemical structures">
+    <img class="team-photo image"
+         src="./team-10.jpg"
+         alt="Team 10 Electrochem members">
     <figcaption>
-      Chemical structures of PFOS and PFOA.
+      Team 10: Electrochem — University of Texas Rio Grande Valley
     </figcaption>
   </figure>
 
-  <h3>Potential Health Effects</h3>
+  <p><strong>Team members, from left to right:</strong></p>
+  <div class="name-strip">
+    <span>Ricardo<br>Salinas</span>
+    <span>Edwin<br>Figueroa</span>
+    <span>Jesus<br>Flores</span>
+    <span>Danielle<br>Champine</span>
+    <span>Jordan<br>Salinas</span>
+    <span>Felipe<br>Elizondo</span>
+  </div>
+
+  <div class="advisors">
+    <h3>Faculty Advisors</h3>
+    <p>Dr. Gyu Leem</p>
+    <p>Dr. Eleazar Marquez</p>
+    <p>Dr. Noe Vargas</p>
+    <p>
+      We appreciate the guidance and technical support
+      provided by our faculty advisors throughout
+      the research and design process.
+    </p>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="section-label">The Problem</div>
+  <h2>PFAS Contamination and Its Far-Reaching Effects</h2>
+
+  <p class="lead">
+    PFAS contamination presents a long-term challenge
+    for water quality, environmental protection,
+    and public health.
+  </p>
+
   <p>
-    Exposure to certain PFAS has been
-    associated with adverse health outcomes,
-    including changes in cholesterol levels,
-    immune responses, liver function,
-    and increased risks of certain cancers.
+    Per- and polyfluoroalkyl substances (PFAS) are a
+    diverse group of synthetic fluorinated chemicals
+    used in industrial processes and consumer products.
+    Many are resistant to environmental degradation,
+    allowing them to persist in water, soil, and
+    ecosystems for extended periods.
+  </p>
+
+  <p>
+    Contamination may originate from industrial
+    discharges, waste disposal, firefighting foams,
+    and historical manufacturing practices. Some PFAS
+    can migrate through groundwater and surface water,
+    potentially reaching drinking-water sources and
+    areas far from the original release.
+  </p>
+
+  <p>
+    Detecting these chemicals can be difficult because
+    environmentally significant concentrations may be
+    extremely low. Established laboratory methods
+    typically require specialized analytical instruments,
+    sample preparation, and trained personnel.
+  </p>
+
+  <div class="three-col">
+    <div class="card">
+      <h3>Persistent Contaminants</h3>
+      <p>
+        Many PFAS resist degradation and can remain
+        in the environment for long periods.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Multiple Exposure Pathways</h3>
+      <p>
+        Certain PFAS can move through water,
+        soil, food, and biological systems.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Complex Detection</h3>
+      <p>
+        Sensitive analytical techniques are
+        needed to detect and identify PFAS
+        at very low concentrations.
+      </p>
+    </div>
+  </div>
+
+  <div class="notice">
+    Our engineering objective is to investigate
+    a compact sensing approach that could
+    complement conventional laboratory testing
+    and support more accessible water monitoring.
+  </div>
+</section>
+
+<section id="pfas">
+  <div class="section-label">Scientific Background</div>
+  <h2>Understanding PFAS</h2>
+
+  <h3>What Are PFAS?</h3>
+  <p>
+    PFAS are a chemically diverse group of substances
+    containing fluorinated carbon structures.
+    Their strong carbon-fluorine bonds contribute
+    to the stability of many compounds within
+    this chemical family.
+  </p>
+  <p>
+    Two widely studied examples are perfluorooctanoic
+    acid (PFOA) and perfluorooctane sulfonic acid (PFOS).
+    Individual PFAS differ in their chemical behavior,
+    environmental mobility, bioaccumulation, and toxicity.
   </p>
 
   <figure>
-    <img class="photo" src="./health-effects.jpg"
-         alt="PFAS health effects diagram">
+    <img class="image" src="./pfas-structure.jpg"
+         alt="PFAS chemical structures">
     <figcaption>
-      Potential health effects associated
-      with exposure to certain PFAS.
+      Representative PFAS chemical structures.
+    </figcaption>
+  </figure>
+
+  <h3>Human Health Effects</h3>
+  <p>
+    Research has associated exposure to certain PFAS
+    with several adverse health outcomes. The strength
+    of scientific evidence depends on the individual
+    PFAS compound and the health outcome being studied.
+  </p>
+  <p>
+    Reported associations include increased cholesterol
+    levels, changes in liver enzymes, reduced antibody
+    responses to some vaccines, and certain
+    pregnancy-related complications.
+  </p>
+
+  <h3>PFAS and Cancer</h3>
+  <p>
+    Studies of PFOA exposure have reported associations
+    with kidney and testicular cancer. The International
+    Agency for Research on Cancer has classified PFOA
+    as carcinogenic to humans.
+  </p>
+  <p>
+    These findings do not mean that every exposed person
+    will develop cancer. Risk depends on the chemical,
+    concentration, exposure duration, and other factors.
+  </p>
+
+  <figure>
+    <img class="image" src="./health-effects.jpg"
+         alt="Potential PFAS health effects">
+    <figcaption>
+      Health effects associated with exposure
+      to certain PFAS compounds.
     </figcaption>
   </figure>
 
   <h3>Environmental Impact</h3>
   <p>
-    PFAS can persist in water, soil,
-    and ecosystems for extended periods.
-    Their widespread use and resistance
-    to degradation make environmental
-    monitoring especially important.
+    PFAS can move between surface water, groundwater,
+    soils, sediments, and living organisms. Some
+    compounds may accumulate in fish and other
+    aquatic organisms through exposure to contaminated
+    water and food.
+  </p>
+  <p>
+    Contaminated agricultural water, soil, or feed
+    can create additional exposure pathways.
+    Certain PFAS may be found in food products such
+    as fish, meat, milk, eggs, and crops from affected
+    environments.
+  </p>
+  <p>
+    The presence and concentration of PFAS vary
+    considerably. This does not mean that all foods
+    in these categories contain unsafe levels.
   </p>
 
   <figure>
-    <img class="photo" src="./environment.jpg"
-         alt="Environmental water contamination">
+    <img class="image" src="./environment.jpg"
+         alt="Environmental PFAS contamination">
     <figcaption>
-      Environmental water contamination.
+      Environmental transport and contamination pathways.
     </figcaption>
   </figure>
 
   <h3>PFAS in Everyday Products</h3>
   <p>
-    PFAS have historically been used in
-    products such as nonstick cookware,
-    water-resistant clothing, and
-    certain industrial materials.
+    Certain PFAS have historically been used for
+    their resistance to water, oil, heat, and
+    chemical exposure. Applications have included
+    some nonstick cookware coatings, water-resistant
+    textiles, stain-resistant materials,
+    industrial processes, and firefighting foams.
+  </p>
+  <p>
+    Manufacturing practices and product formulations
+    have changed over time, and not every product
+    in these categories contains PFAS.
   </p>
 
   <figure>
-    <img class="photo" src="./everyday-products.jpg"
-         alt="Everyday products associated with PFAS">
+    <img class="image" src="./everyday-products.jpg"
+         alt="PFAS applications in everyday products">
     <figcaption>
-      Examples of products associated
-      with PFAS applications.
+      Examples of products historically associated
+      with certain PFAS applications.
     </figcaption>
   </figure>
 </section>
 
 <section id="solution">
-  <h2>Our Proposed Solution</h2>
+  <div class="section-label">Our Proposed Solution</div>
+  <h2>A Compact Electrochemical Sensing System</h2>
 
-  <div class="highlight">
-    Team Electrochem is developing a compact
-    electrochemical sensing system to help
-    detect PFAS in water more efficiently
-    and closer to the point of sampling.
-  </div>
-
-  <p>
-    Our proposed approach uses electrochemical
-    impedance spectroscopy (EIS) to study
-    changes in electrical impedance at
-    an electrode interface.
-  </p>
-  <p>
-    The sensing system will use a specialized
-    electrode configuration, signal processing,
-    and calibration to investigate PFAS
-    concentrations in water.
+  <p class="lead">
+    Our proposed device uses electrochemical impedance
+    spectroscopy to investigate changes in electrical
+    impedance at an electrode interface.
   </p>
 
-  <div class="grid">
-    <div class="card">
-      <h3>Compact Design</h3>
+  <p>
+    The system is designed around a controlled
+    water-circulation loop, a specialized electrode
+    assembly, EIS instrumentation, data processing,
+    and a proposed solar-assisted power system.
+  </p>
+
+  <h3>How the System Works</h3>
+
+  <div class="process">
+    <div class="process-step">
+      <div class="step-number">01</div>
+      <h3>Water Reservoir</h3>
       <p>
-        Reduce the size of the sensing
-        system for portable applications.
+        The water sample is stored in a reservoir
+        that supplies the circulation system.
       </p>
     </div>
-    <div class="card">
-      <h3>Electrochemical Detection</h3>
+    <div class="process-step">
+      <div class="step-number">02</div>
+      <h3>Water Pump</h3>
       <p>
-        Use impedance measurements to
-        investigate PFAS-related responses.
+        A miniature pump transports water
+        from the reservoir toward the sensor.
       </p>
     </div>
-    <div class="card">
-      <h3>Accessible Monitoring</h3>
+    <div class="process-step">
+      <div class="step-number">03</div>
+      <h3>Flow Gasket</h3>
       <p>
-        Explore a practical alternative
-        to frequent off-site testing.
+        Water enters a patterned silicone gasket
+        that guides the sample across the
+        electrode sensing region.
+      </p>
+    </div>
+    <div class="process-step">
+      <div class="step-number">04</div>
+      <h3>Electrochemical Measurement</h3>
+      <p>
+        The EIS instrument applies a small
+        alternating electrical signal and
+        measures the electrode response.
+      </p>
+    </div>
+    <div class="process-step">
+      <div class="step-number">05</div>
+      <h3>Recirculation</h3>
+      <p>
+        Water returns to the circulation loop
+        for additional measurements under
+        controlled conditions.
+      </p>
+    </div>
+    <div class="process-step">
+      <div class="step-number">06</div>
+      <h3>Data Processing</h3>
+      <p>
+        Impedance data are processed to identify
+        useful electrochemical features and,
+        after validation, estimate concentrations.
+      </p>
+    </div>
+    <div class="process-step">
+      <div class="step-number">07</div>
+      <h3>Display</h3>
+      <p>
+        The proposed interface displays
+        processed measurement information
+        for the user.
+      </p>
+    </div>
+    <div class="process-step">
+      <div class="step-number">08</div>
+      <h3>Solar-Assisted Power</h3>
+      <p>
+        A proposed solar-assisted electrical
+        system supplies energy to the device.
+        Final components remain under evaluation.
       </p>
     </div>
   </div>
 
   <h3>Functional Diagram</h3>
-  <p>
-    The functional diagram illustrates
-    the proposed interactions between
-    the water sample, sensing components,
-    electronics, and output system.
-  </p>
-
   <figure>
-    <img class="photo" src="./functional-diagram.jpg"
-         alt="PFAS device functional diagram">
+    <img class="image" src="./functional-diagram.jpg"
+         alt="Sensor functional diagram">
     <figcaption>
-      Functional diagram of the proposed device.
-    </figcaption>
-  </figure>
-</section>
-
-<section id="design">
-  <h2>From Idea to Reality</h2>
-  <p>
-    Our engineering design process began
-    by identifying the major functions
-    required for a compact PFAS sensing device.
-  </p>
-  <p>
-    We explored alternative materials,
-    electrode configurations, sensing
-    methods, and component arrangements
-    to evaluate possible solutions.
-  </p>
-
-  <h3>Morphological Chart</h3>
-  <p>
-    The morphological chart organizes
-    potential design solutions for
-    the different functions of the system.
-  </p>
-
-  <figure>
-    <img class="photo" src="./morphological-chart.jpg"
-         alt="Engineering morphological chart">
-    <figcaption>
-      Morphological chart showing
-      potential design alternatives.
+      Proposed water circulation, sensing,
+      processing, and power architecture.
     </figcaption>
   </figure>
 
-  <h3>Sensor Design Considerations</h3>
-  <div class="grid">
-    <div class="card">
-      <h3>Working Electrode</h3>
-      <p>
-        Investigating conductive electrode
-        materials and surface structures
-        for impedance-based detection.
-      </p>
-    </div>
-    <div class="card">
-      <h3>Flow Gaskets</h3>
-      <p>
-        Exploring gasket materials and
-        geometries to control water flow
-        through the sensor assembly.
-      </p>
-    </div>
-    <div class="card">
-      <h3>Reference and Counter Electrodes</h3>
-      <p>
-        Evaluating electrode configurations
-        suitable for electrochemical
-        measurements.
-      </p>
-    </div>
+  <div class="notice">
+    The sensing approach remains under development.
+    Reliable PFAS concentration measurements will
+    require calibration, selectivity testing,
+    repeatability studies, and comparison with
+    validated analytical methods.
   </div>
 </section>
 
-<section id="prototype">
-  <h2>Prototype Early and Often</h2>
+<section id="design">
+  <div class="section-label">Engineering Design</div>
+  <h2>From Idea to Reality</h2>
+
   <p>
-    Developing preliminary models allows
-    our team to evaluate component placement,
-    physical dimensions, material selection,
-    and the overall feasibility of the design.
+    Our design process began by identifying the
+    functions required for a compact water-sensing
+    platform. A morphological chart was developed
+    to compare possible materials, components,
+    electrode configurations, and system architectures.
   </p>
 
-  <h3>Device Concept</h3>
   <figure>
-    <img class="photo" src="./device-concept.jpg"
-         alt="PFAS sensing device concept">
+    <img class="image" src="./morphological-chart.jpg"
+         alt="Morphological chart">
     <figcaption>
-      Preliminary concept for the
-      portable PFAS sensing device.
+      Morphological chart showing engineering
+      alternatives considered during development.
+    </figcaption>
+  </figure>
+
+  <h3>Current Design Decisions</h3>
+
+  <div class="three-col">
+    <div class="card">
+      <h3>Working Electrode</h3>
+      <p>
+        Option D is the current selected working
+        electrode concept. The sensing interface
+        is being investigated for its response
+        during impedance measurements.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Reference Electrode</h3>
+      <p>
+        Option D is tentatively preferred.
+        The final reference electrode
+        arrangement remains under evaluation.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Counter Electrode</h3>
+      <p>
+        Option A is the current design direction.
+        The concept uses a glass substrate,
+        a silver electrical connection,
+        and a platinum-coated active surface.
+      </p>
+    </div>
+  </div>
+
+  <h3>Flow Gasket Development</h3>
+
+  <p>
+    The flow gasket is an important component
+    because it controls the path of water
+    through the electrode assembly while
+    providing a sealing interface.
+  </p>
+
+  <p>
+    Our current concept uses a silicone gasket
+    with a maze-like flow channel. Rather than
+    allowing water to pass through an unrestricted
+    chamber, the patterned channel directs
+    water across the sensing region.
+  </p>
+
+  <p>
+    The geometry is intended to promote
+    consistent electrode contact. However,
+    pressure drop, residence time, stagnant
+    regions, trapped air, and repeatability
+    must be evaluated experimentally.
+  </p>
+
+  <h3>EIS and Power Selection</h3>
+
+  <p>
+    The final EIS instrument has not yet been
+    selected. Similarly, the proposed
+    solar-assisted power system requires
+    additional component evaluation and
+    integration planning.
+  </p>
+</section>
+
+<section id="prototype">
+  <div class="section-label">Prototype Development</div>
+  <h2>Turning the Concept Into a Physical System</h2>
+
+  <p>
+    Prototype development allows our team to
+    evaluate component placement, material
+    compatibility, fluid handling, electrode
+    spacing, and practical assembly constraints.
+  </p>
+
+  <h3>Overall Device Concept</h3>
+
+  <p>
+    The device concept integrates a water
+    reservoir, miniature pump, electrochemical
+    sensing assembly, EIS instrument,
+    processing electronics, display,
+    and proposed solar-assisted power.
+  </p>
+
+  <figure>
+    <img class="image" src="./device-concept.jpg"
+         alt="Device concept">
+    <figcaption>
+      Preliminary device architecture
+      and water circulation concept.
     </figcaption>
   </figure>
 
   <h3>Electrode Stack Concept</h3>
+
   <p>
-    The proposed sensing assembly consists
-    of layered electrode and gasket components
-    designed to support controlled water
-    interaction with the sensing surfaces.
+    The sensor assembly uses a layered
+    architecture consisting of electrodes
+    and patterned flow components.
+    The working electrode follows the
+    selected Option D concept.
+  </p>
+
+  <p>
+    The current gasket concept uses pure
+    silicone with a maze-like channel
+    designed to direct water across
+    the electrode sensing region.
+  </p>
+
+  <p>
+    A platinum wire is also being considered
+    within the gasket assembly. Its final
+    placement and electrical function
+    will be confirmed during detailed design.
+  </p>
+
+  <p>
+    The proposed counter electrode uses
+    a glass substrate with a silver
+    electrical connection and a
+    platinum-coated active surface.
   </p>
 
   <figure>
-    <img class="photo" src="./electrode-stack.jpg"
-         alt="Electrode stack design concept">
+    <img class="image" src="./electrode-stack.jpg"
+         alt="Electrode stack concept">
     <figcaption>
       Preliminary layered electrode
-      assembly for electrochemical sensing.
+      and flow-gasket architecture.
     </figcaption>
   </figure>
-</section>
 
-<section id="final">
-  <h2>Final Product Development</h2>
-  <p>
-    The project is currently in the design
-    and prototyping stage.
-  </p>
-  <p>
-    The team is continuing to investigate
-    electrode materials, sensor geometry,
-    electrochemical instrumentation,
-    and methods for integrating the
-    components into a compact system.
-  </p>
-  <p>
-    Device performance and detection
-    capabilities will require experimental
-    validation.
-  </p>
-</section>
-
-<section id="future">
-  <h2>Future Work</h2>
-  <p>
-    As development continues, our team
-    will focus on the following objectives:
-  </p>
-  <ul>
-    <li>Finalize sensor material selection.</li>
-    <li>Obtain and assemble prototype components.</li>
-    <li>Integrate the electrodes with EIS equipment.</li>
-    <li>Evaluate electrochemical responses.</li>
-    <li>Investigate sensitivity and detection limits.</li>
-    <li>Improve the compactness of the design.</li>
-    <li>Validate performance using water samples.</li>
-  </ul>
-</section>
-
-<section id="team">
-  <h2>Meet Team Electrochem</h2>
-
-  <div class="grid">
-    <div class="card">
-      <h3>Student Team</h3>
-      <p>Danielle Champine</p>
-      <p>Edwin Figueroa</p>
-      <p>Felipe Elizondo</p>
-      <p>Jesus Flores</p>
-      <p>Jordan Salinas</p>
-      <p>Ricardo Salinas</p>
-    </div>
-
-    <div class="card">
-      <h3>Faculty</h3>
-      <p>Dr. Gyu Leem</p>
-      <p>Dr. Eleazar Marquez</p>
-      <p>Dr. Noe Vargas</p>
-    </div>
+  <div class="notice">
+    These illustrations represent preliminary
+    engineering concepts. Final fabrication
+    details and device performance have
+    not yet been experimentally validated.
   </div>
 </section>
 
-<section id="contact">
-  <h2>Learn More About Our Project</h2>
+<section id="future">
+  <div class="section-label">Next Steps</div>
+  <h2>Future Engineering Development</h2>
+
+  <div class="three-col">
+    <div class="card">
+      <h3>Material Selection</h3>
+      <p>
+        Finalize electrode materials,
+        coatings, gaskets, and electrical
+        connection methods.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Sensor Fabrication</h3>
+      <p>
+        Manufacture and assemble the
+        patterned gasket and layered
+        electrode components.
+      </p>
+    </div>
+    <div class="card">
+      <h3>EIS Integration</h3>
+      <p>
+        Select instrumentation and
+        establish electrical connections
+        for impedance measurements.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Flow Testing</h3>
+      <p>
+        Investigate leakage, flow
+        distribution, pressure drop,
+        and measurement consistency.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Calibration</h3>
+      <p>
+        Evaluate sensitivity,
+        selectivity, detection limits,
+        and interfering substances.
+      </p>
+    </div>
+    <div class="card">
+      <h3>System Integration</h3>
+      <p>
+        Integrate the pump, sensor,
+        electronics, display,
+        and power system.
+      </p>
+    </div>
+  </div>
+
   <p>
-    For additional information about
-    Team Electrochem and the senior
-    design project, contact:
+    The ultimate objective is to determine
+    whether the proposed electrochemical
+    sensing approach can produce reliable,
+    repeatable PFAS-related measurements
+    in water.
   </p>
+</section>
+
+<section id="references">
+  <div class="section-label">Scientific Sources</div>
+  <h2>References and Further Reading</h2>
+
+  <p>
+    The following resources provide
+    scientific background on PFAS exposure,
+    health effects, food contamination,
+    and environmental monitoring.
+  </p>
+
+  <ol class="reference-list">
+    <li>
+      <a href="https://www.atsdr.cdc.gov/pfas/about/health-effects.html"
+         target="_blank" rel="noopener">
+        CDC/ATSDR — PFAS Health Effects
+      </a>
+    </li>
+    <li>
+      <a href="https://www.atsdr.cdc.gov/pfas/hcp/clinical-overview/human-exposure.html"
+         target="_blank" rel="noopener">
+        CDC/ATSDR — Human Exposure to PFAS
+      </a>
+    </li>
+    <li>
+      <a href="https://www.fda.gov/food/environmental-contaminants-food/and-polyfluoroalkyl-substances-pfas"
+         target="_blank" rel="noopener">
+        FDA — PFAS in Food
+      </a>
+    </li>
+    <li>
+      <a href="https://www.fda.gov/food/process-contaminants-food/questions-and-answers-pfas-food"
+         target="_blank" rel="noopener">
+        FDA — Questions and Answers on PFAS in Food
+      </a>
+    </li>
+    <li>
+      <a href="https://monographs.iarc.who.int/"
+         target="_blank" rel="noopener">
+        IARC — Monographs on Carcinogenic Hazards
+      </a>
+    </li>
+  </ol>
+
+  <p>
+    Engineering concepts described on this
+    website represent the team's ongoing
+    research and development activities.
+  </p>
+</section>
+
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <h2>Connect With Team Electrochem</h2>
+
+  <p>
+    For additional information about the
+    senior design project, please contact:
+  </p>
+
   <p>
     <strong>Dr. Noe Vargas Hernandez</strong>
   </p>
+
   <p>
     <a href="mailto:noe.vargas@utrgv.edu">
       noe.vargas@utrgv.edu
     </a>
   </p>
-</section>
 
-<section id="acknowledgements">
-  <h2>Acknowledgements</h2>
+  <h3>Acknowledgements</h3>
   <p>
     Team Electrochem thanks Dr. Gyu Leem,
     Dr. Eleazar Marquez, and Dr. Noe Vargas
-    for their guidance and support
-    throughout the senior design project.
+    for their guidance and support.
   </p>
 </section>
 
 </main>
 
 <footer>
-  <p><strong>Team 10: Electrochem</strong></p>
+  <strong>TEAM 10: ELECTROCHEM</strong>
   <p>
     University of Texas Rio Grande Valley
-    | Mechanical Engineering
   </p>
-  <p>Senior Design I</p>
+  <p>
+    Mechanical Engineering | Senior Design I
+  </p>
+  <p>
+    Electrochemical PFAS Sensing Research
+  </p>
 </footer>
 
-<dialog id="photoViewer">
-  <img id="largePhoto" alt="Enlarged project image">
+<dialog id="imageViewer">
+  <img id="enlargedImage" alt="Enlarged project image">
 </dialog>
 
 <script>
-const viewer = document.getElementById("photoViewer");
-const largePhoto = document.getElementById("largePhoto");
+const viewer =
+  document.getElementById("imageViewer");
 
-document.querySelectorAll("img.photo").forEach(photo => {
-  photo.addEventListener("click", () => {
-    largePhoto.src = photo.src;
-    largePhoto.alt = photo.alt;
-    viewer.showModal();
+const enlarged =
+  document.getElementById("enlargedImage");
+
+document.querySelectorAll("img.image")
+  .forEach(img => {
+    img.addEventListener("click", () => {
+      enlarged.src = img.src;
+      enlarged.alt = img.alt;
+      viewer.showModal();
+    });
   });
-});
 
-viewer.addEventListener("click", () => viewer.close());
+viewer.addEventListener("click", event => {
+  if (event.target === viewer) {
+    viewer.close();
+  }
+});
 </script>
 
 </body>
