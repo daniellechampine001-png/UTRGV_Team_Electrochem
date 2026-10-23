@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="UTRGV Team 10 Electrochem - Electrochemical PFAS sensing research and engineering design.">
 <title>Team 10: Electrochem | UTRGV</title>
-<meta name="description" content="UTRGV Team 10 Electrochem - Research and development of a compact electrochemical PFAS sensing system.">
 
 <style>
 :root {
@@ -13,7 +13,6 @@
   --blue:#1875ad;
   --pale:#eaf3f9;
   --line:#b9d5e6;
-  --white:#fff;
   --muted:#425d74;
 }
 * {box-sizing:border-box}
@@ -33,7 +32,7 @@ a {color:var(--blue)}
   flex-wrap:wrap;
   gap:20px;
   padding:18px 5%;
-  background:#edf5facc;
+  background:#edf5faf0;
   backdrop-filter:blur(18px);
   border-bottom:1px solid #ffffffaa;
   position:sticky;
@@ -53,6 +52,7 @@ a {color:var(--blue)}
   letter-spacing:1px;
 }
 .brand small {
+  display:block;
   font-size:10px;
   letter-spacing:2px;
 }
@@ -88,8 +88,11 @@ a {color:var(--blue)}
   color:var(--navy);
 }
 .nav-links a:hover {color:var(--blue)}
+
+/* HOMEPAGE */
+
 .hero {
-  min-height:720px;
+  min-height:760px;
   position:relative;
   overflow:hidden;
   background:
@@ -99,14 +102,15 @@ a {color:var(--blue)}
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:55px 20px 100px;
+  padding:65px 20px 100px;
 }
 .hero:before {
   content:"";
   position:absolute;
   inset:0;
   background:repeating-linear-gradient(
-    135deg,transparent 0,
+    135deg,
+    transparent 0,
     transparent 170px,
     #ffffff65 171px,
     transparent 172px
@@ -125,10 +129,10 @@ a {color:var(--blue)}
   align-items:center;
   text-align:center;
   padding:55px;
-  background:#f5f9fc70;
+  background:#f5f9fce8;
   box-shadow:0 15px 65px #7195b330;
   position:relative;
-  z-index:2;
+  z-index:3;
 }
 .eyebrow {
   font-size:13px;
@@ -174,47 +178,105 @@ a {color:var(--blue)}
 .hero-side {
   position:absolute;
   top:43%;
-  z-index:2;
-  font-size:13px;
-  letter-spacing:4px;
+  z-index:4;
+  font-size:12px;
+  letter-spacing:3px;
   line-height:2;
   font-weight:700;
+  color:#193b5a;
 }
-.hero-left {left:4%}
-.hero-right {right:4%}
+.hero-left {left:3%}
+.hero-right {right:3%}
+
+/* MATCHING DIAMOND IMAGES */
+
 .diamond {
   position:absolute;
-  width:170px;
-  height:170px;
+  width:205px;
+  height:205px;
   transform:rotate(45deg);
-  border:3px solid white;
+  border:4px solid rgba(255,255,255,.95);
   overflow:hidden;
-  opacity:.75;
+  opacity:1;
+  z-index:2;
+  box-shadow:0 0 30px rgba(255,255,255,.45);
 }
 .diamond img {
+  position:absolute;
   width:145%;
   height:145%;
+  max-width:none;
   object-fit:cover;
-  transform:rotate(-45deg) scale(1.4);
+  top:-22.5%;
+  left:-22.5%;
+  transform:rotate(-45deg) scale(1.15);
 }
-.diamond-left {left:15%;top:33%}
-.diamond-right {right:15%;top:35%}
+.diamond-left {
+  left:14%;
+  top:36%;
+}
+.diamond-right {
+  right:14%;
+  top:36%;
+}
+.small-diamond {
+  position:absolute;
+  width:52px;
+  height:52px;
+  border:2px solid #ffffffd9;
+  transform:rotate(45deg);
+  z-index:1;
+}
+.small-left-top {left:16%;top:24%}
+.small-left-bottom {left:18%;top:69%}
+.small-right-top {right:16%;top:24%}
+.small-right-bottom {right:18%;top:69%}
+.sparkle {
+  position:absolute;
+  width:12px;
+  height:12px;
+  background:#ffffffd9;
+  border-radius:50%;
+  box-shadow:0 0 25px 12px #ffffffa8;
+  z-index:1;
+}
+.sparkle-one {left:24%;top:27%}
+.sparkle-two {right:24%;top:27%}
+.sparkle-three {left:29%;bottom:17%}
+.sparkle-four {right:29%;bottom:17%}
+.water-effect {
+  position:absolute;
+  left:-5%;
+  right:-5%;
+  bottom:-95px;
+  height:240px;
+  background:
+    radial-gradient(ellipse at 25% 80%,#b5dbf1a8,transparent 60%),
+    radial-gradient(ellipse at 75% 80%,#a6d3f0a8,transparent 60%);
+  border-radius:50%;
+  opacity:.8;
+  pointer-events:none;
+}
 .scroll-cue {
   position:absolute;
-  bottom:30px;
+  bottom:25px;
+  z-index:4;
   text-align:center;
   letter-spacing:4px;
   font-size:11px;
   font-weight:700;
 }
 .scroll-cue a {text-decoration:none}
+
+/* CONTENT */
+
 main {
   max-width:1180px;
   margin:0 auto;
   padding:0 20px 50px;
 }
 section {
-  background:#ffffffd9;
+  background:#ffffffed;
   border:1px solid #ffffff;
   border-radius:22px;
   padding:45px;
@@ -263,13 +325,6 @@ p {margin:0 0 18px}
 }
 .card h3 {margin-top:0}
 .card p:last-child {margin-bottom:0}
-.feature {
-  padding:22px;
-  border-left:3px solid var(--blue);
-  background:#f1f8fd;
-  border-radius:8px;
-  margin:15px 0;
-}
 .image {
   width:100%;
   max-height:540px;
@@ -360,8 +415,13 @@ dialog img {
   max-height:90vh;
   object-fit:contain;
 }
-@media(max-width:1000px) {
-  .hero-side,.diamond {display:none}
+@media(max-width:1150px) {
+  .hero-side {display:none}
+  .diamond-left {left:5%}
+  .diamond-right {right:5%}
+}
+@media(max-width:850px) {
+  .diamond,.small-diamond,.sparkle {display:none}
   .site-nav {justify-content:center}
 }
 @media(max-width:700px) {
@@ -405,13 +465,24 @@ dialog img {
 </nav>
 
 <header class="hero" id="home">
+
   <div class="hero-side hero-left">
     CLEANER<br>WATER.<br>SAFER<br>COMMUNITIES.<br>
     A BRIGHTER<br>FUTURE.
   </div>
 
+  <div class="small-diamond small-left-top"></div>
+  <div class="small-diamond small-left-bottom"></div>
+  <div class="small-diamond small-right-top"></div>
+  <div class="small-diamond small-right-bottom"></div>
+
+  <div class="sparkle sparkle-one"></div>
+  <div class="sparkle sparkle-two"></div>
+  <div class="sparkle sparkle-three"></div>
+  <div class="sparkle sparkle-four"></div>
+
   <div class="diamond diamond-left">
-    <img src="./environment.jpg" alt="Water">
+    <img src="./environment.jpg" alt="Clean flowing water">
   </div>
 
   <div class="hero-circle">
@@ -432,16 +503,16 @@ dialog img {
     </a>
   </div>
 
- 
-<div class="diamond diamond-right">
-  <img src="./environment.jpg" alt="Clean flowing water">
-</div>
-
+  <div class="diamond diamond-right">
+    <img src="./environment.jpg" alt="Clean flowing water">
+  </div>
 
   <div class="hero-side hero-right">
     ENVIRONMENT<br>INNOVATION<br>
     SUSTAINABILITY<br>ENGINEERING
   </div>
+
+  <div class="water-effect"></div>
 
   <div class="scroll-cue">
     <a href="#about">SCROLL ↓</a>
@@ -1125,15 +1196,9 @@ dialog img {
 
 <footer>
   <strong>TEAM 10: ELECTROCHEM</strong>
-  <p>
-    University of Texas Rio Grande Valley
-  </p>
-  <p>
-    Mechanical Engineering | Senior Design I
-  </p>
-  <p>
-    Electrochemical PFAS Sensing Research
-  </p>
+  <p>University of Texas Rio Grande Valley</p>
+  <p>Mechanical Engineering | Senior Design I</p>
+  <p>Electrochemical PFAS Sensing Research</p>
 </footer>
 
 <dialog id="imageViewer">
@@ -1141,20 +1206,16 @@ dialog img {
 </dialog>
 
 <script>
-const viewer =
-  document.getElementById("imageViewer");
+const viewer = document.getElementById("imageViewer");
+const enlarged = document.getElementById("enlargedImage");
 
-const enlarged =
-  document.getElementById("enlargedImage");
-
-document.querySelectorAll("img.image")
-  .forEach(img => {
-    img.addEventListener("click", () => {
-      enlarged.src = img.src;
-      enlarged.alt = img.alt;
-      viewer.showModal();
-    });
+document.querySelectorAll("img.image").forEach(img => {
+  img.addEventListener("click", () => {
+    enlarged.src = img.src;
+    enlarged.alt = img.alt;
+    viewer.showModal();
   });
+});
 
 viewer.addEventListener("click", event => {
   if (event.target === viewer) {
